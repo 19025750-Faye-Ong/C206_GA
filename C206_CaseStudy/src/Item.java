@@ -1,5 +1,6 @@
 
 public class Item {
+	private int id;
 	private String name;
 	private String description;
 	private double minBid;
@@ -7,14 +8,19 @@ public class Item {
 	private String auctionEnd;
 	private double bidIncrement;
 	
-	public Item(String name, String description, double minBid, String auctionStart, String auctionEnd,
+	public Item(int id, String name, String description, double minBid, String auctionStart, String auctionEnd,
 			double bidIncrement) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.minBid = minBid;
 		this.auctionStart = "";
 		this.auctionEnd = "";
 		this.bidIncrement = bidIncrement;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
