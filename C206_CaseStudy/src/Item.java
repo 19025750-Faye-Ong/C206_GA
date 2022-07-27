@@ -12,8 +12,8 @@ public class Item {
 		this.name = name;
 		this.description = description;
 		this.minBid = minBid;
-		this.auctionStart = auctionStart;
-		this.auctionEnd = auctionEnd;
+		this.auctionStart = "";
+		this.auctionEnd = "";
 		this.bidIncrement = bidIncrement;
 	}
 
