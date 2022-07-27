@@ -9,5 +9,5 @@ public class Admin extends Account{
 	public int getLoginAttempt() {
 		return loginAttempt;
 	}
-
+ 
 }
