@@ -7,6 +7,16 @@ public class Item {
 	private String auctionEnd;
 	private double bidIncrement;
 	
+	public Item(String name, String description, double minBid, String auctionStart, String auctionEnd,
+			double bidIncrement) {
+		this.name = name;
+		this.description = description;
+		this.minBid = minBid;
+		this.auctionStart = auctionStart;
+		this.auctionEnd = auctionEnd;
+		this.bidIncrement = bidIncrement;
+	}
+
 	public String getName() {
 		return name;
 	}
