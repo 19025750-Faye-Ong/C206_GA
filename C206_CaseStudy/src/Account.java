@@ -1,8 +1,8 @@
 
-public class Account 
-{private String userID; 
-private String password;
-private String username;
+public class Account {
+	private String userID; 
+	private String password;
+	private String username;
 
 
 public Account(String userID, String password, String username) {
