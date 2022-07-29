@@ -6,6 +6,11 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		ArrayList<Item> itemList = new ArrayList<Item>();
 
+		
+		System.out.println("Team 1 is the best");
+		
+		
+		
 	}
 
 }
