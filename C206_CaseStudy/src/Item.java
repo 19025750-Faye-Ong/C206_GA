@@ -7,9 +7,9 @@ public class Item {
 	private String auctionStart;
 	private String auctionEnd;
 	private double bidIncrement;
+	private boolean isAvailable;
 	
-	public Item(int id, String name, String description, double minBid, String auctionStart, String auctionEnd,
-			double bidIncrement) {
+	public Item(int id, String name, String description, double minBid, double bidIncrement) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -17,6 +17,7 @@ public class Item {
 		this.auctionStart = "";
 		this.auctionEnd = "";
 		this.bidIncrement = bidIncrement;
+		this.isAvailable = true;
 	}
 
 	public int getId() {
@@ -69,5 +70,13 @@ public class Item {
 	
 	public void setBidIncrement(double bidIncrement) {
 		this.bidIncrement = bidIncrement;
+	}
+	
+	public boolean getIsAvailable() {
+		return isAvailable;
+	}
+
+	public void setIsAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 }
