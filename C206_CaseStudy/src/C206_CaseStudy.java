@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -145,11 +144,12 @@ public class C206_CaseStudy {
 	//================================= Option 1 View (CRUD - Read) =================================
 
 	//Item List View
-	/*public static String retrieveAllItem(ArrayList<Item>itemList ) {
+	public static String retrieveAllItem(ArrayList<Item>itemList ) {
 		String output = "";
 
 		for (int i = 0; i < itemList.size(); i++) {
-			output += String.format("%-10s %-30s %-10s %-10d.2f %-10s %-10s %-20d.2f\n", itemList.get(i).getName()
+			
+			output += String.format("%-10s %-30s %-10s %-10d.2f %-10s %-10s %-20d.2f\n", itemList.get(i).getName(),
 					itemList.get(i).getDescription(), C206_CaseStudy.showAvailability(itemList.get(i).getIsAvailable()), itemList.get(i).getMinBid(), 
 					itemList.get(i).getAuctionStart(),itemList.get(i).getAuctionEnd(), itemList.get(i).getBidIncrement());
 
@@ -160,11 +160,10 @@ public class C206_CaseStudy {
 
 	public static void viewAllItem(ArrayList<Item> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "ASSET TAG", "DESCRIPTION",
-				"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
+		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "NAME", "DESCRIPTION","AVAILIBILITY", "MinBid","AuctionStart", "AuctionEnd", "BidIncrement" );
 		output += retrieveAllItem(itemList);	
 		System.out.println(output);
-	}*/
+	}
 
 	//User List View (FOR ADMIN ONLY)
 	public static String retrieveAllUser(ArrayList<User> userList) {
@@ -191,26 +190,6 @@ public class C206_CaseStudy {
 	//================================= Option 2 Add (CRUD - Create)=================================
 
 	//Add Item
-	public static Item inputItem() {
-		int tag = Helper.readInt("Enter item id > ");
-		String name = Helper.readString("Enter item name> ");
-		String description = Helper.readString("Enter item description > ");
-		double minBid = Helper.readDouble("Enter minimum bid > ");
-		LocalDate auctionStart = Helper.readDate("Enter auction start date > ");
-		LocalDate auctionEnd = Helper.readDate("Enter auction end date > ");
-		double bidIncrement = Helper.readDouble("Enter bid increment > ");
-
-		Item it = new Item(tag, name, description, minBid, auctionStart, auctionEnd, bidIncrement);
-		return it;
-		
-	}
-	public static void addItem(ArrayList<Item> itemList, Item it) {
-		
-		itemList.add(it);
-		
-	}
-
-	
 
 	//Add User (Register User)
 	public static User inputUser() {
@@ -235,49 +214,6 @@ public class C206_CaseStudy {
 	//================================= Option 3 Edit (CURD- Update) =================================
 
 	//Edit Item
-	public static boolean doUpdateItem(ArrayList<Item>itemList, int itId, String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd, double bidIncrement) {
-
-		boolean isUpdate = false;
-
-		for (int i = 0; i < itemList.size(); i++) {
-
-			 int id = itemList.get(i).getId();
-
-			if (itId == id && itemList.get(i).getIsAvailable() == true) {
-
-				itemList.get(i).setIsAvailable(false);
-				itemList.get(i).setName(name);
-				itemList.get(i).setDescription(description);
-				itemList.get(i).setMinBid(minBid);
-				itemList.get(i).setBidIncrement( bidIncrement);
-				itemList.get(i).setAuctionStart(auctionStart);
-                                itemList.get(i).setAuctionEnd(auctionEnd);
-
-
-				isUpdate = true;
-
-			}
-		}
-		return isUpdate;
-	}
-
-	public static void updateItem(ArrayList<Item> itemList) {
-		C206_CaseStudy.viewAllItem(itemList);
-		int itId = Helper.readInt("Enter Item ID > ");
-		String name  = Helper.readString("Enter your new  name > ");
-		String description = Helper.readString("Enter new description > ");
-		double minBid = Helper.readDouble("Enter new minimum bid > ");
-		LocalDate auctionStart = Helper.readDate("Enter new aution start date > ");
-		LocalDate auctionEnd = Helper.readDate("Enter new aution end date > ");
-        double bidIncrement= Helper.readDouble("Enter new bid increment > ");      
-        
-		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, auctionStart, auctionEnd, bidIncrement);
-		if (isUpdate == false) {
-			System.out.println("Invalid Item ID!");
-		} else {
-			System.out.println("Item " + itId + " is updated");
-		} 
-	}
 
 	//Edit User Info
 	public static boolean doUpdateUser(ArrayList<User> userList, String usId, String pass, int usCN, String usEmail) {
