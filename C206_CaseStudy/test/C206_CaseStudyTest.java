@@ -93,6 +93,31 @@ public class C206_CaseStudyTest {
 
 
 	}
+	@Test
+	public void testDoRemoveUser() {
+		//boundary
+		assertNotNull("test if there is a removal of user", userList);
+				
+		C206_CaseStudy.addUser(userList, us1);
+				
+		// normal
+		Boolean ok = C206_CaseStudy.doRemoveUser(userList, "tester", "y");
+		assertTrue("Test if user is ok to remove?", ok);
+		assertFalse(userList.get(0).getIsAvail());
+		assertEquals(userList.get(0).getUserID(),"tester");
+				
+						
+		//error condition
+		ok = C206_CaseStudy.doRemoveUser(userList, "tester", "y");
+		assertFalse("Test if the same user is NOT ok to remove again?", ok);	
+	
+				
+		//error condition
+		ok = C206_CaseStudy.doRemoveUser(userList, "tester2", "y");
+		assertFalse("Test that non-existing user is NOT ok to remove?", ok);
+
+
+	}
 	
 
 	@After
