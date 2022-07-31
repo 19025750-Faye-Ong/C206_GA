@@ -67,6 +67,9 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+		us1 = null;
+		us2 = null;
+		userList = null;
 	}
 	
 }
