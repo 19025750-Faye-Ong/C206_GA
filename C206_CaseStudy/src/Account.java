@@ -3,12 +3,14 @@ public class Account {
 	private String userID; 
 	private String password;
 	private String username;
+	private boolean isAvail;
 
 
 	public Account(String userID, String password, String username) {
 		this.userID = userID;
 		this.password = password;
 		this.username = username;
+		this.isAvail = true;
 }
 
 
@@ -41,4 +43,11 @@ public class Account {
 		this.username = username;
 	}
 
+	public boolean getIsAvail() {
+		return isAvail;
+	}
+
+	public void setIsAvail(boolean isAvail) {
+		this.isAvail = isAvail;
+	}
 }
