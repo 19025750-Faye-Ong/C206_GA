@@ -113,7 +113,7 @@ public class C206_CaseStudy {
 				"CONTACT NUMBER", "EMAIL");
 		output += retrieveAllUser(userList);
 		System.out.println(output);
-	}
+	} 
 
 	//================================= Option 2 Add (CRUD - Create)=================================
 
