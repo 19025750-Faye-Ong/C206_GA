@@ -1,21 +1,22 @@
+import java.time.LocalDate;
 
 public class Item {
 	private int id;
 	private String name;
 	private String description;
 	private double minBid;
-	private String auctionStart;
-	private String auctionEnd;
+	private LocalDate auctionStart;
+	private LocalDate auctionEnd;
 	private double bidIncrement;
 	private boolean isAvailable;
 	
-	public Item(int id, String name, String description, double minBid, double bidIncrement) {
+	public Item(int id, String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd, double bidIncrement) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.minBid = minBid;
-		this.auctionStart = "";
-		this.auctionEnd = "";
+		this.auctionStart = this.auctionStart;
+		this.auctionEnd = this.auctionEnd;
 		this.bidIncrement = bidIncrement;
 		this.isAvailable = true;
 	}
@@ -48,19 +49,19 @@ public class Item {
 		this.minBid = minBid;
 	}
 	
-	public String getAuctionStart() {
+	public LocalDate getAuctionStart() {
 		return auctionStart;
 	}
 	
-	public void setAuctionStart(String auctionStart) {
+	public void setAuctionStart(LocalDate auctionStart) {
 		this.auctionStart = auctionStart;
 	}
 	
-	public String getAuctionEnd() {
+	public LocalDate getAuctionEnd() {
 		return auctionEnd;
 	}
 	
-	public void setAuctionEnd(String auctionEnd) {
+	public void setAuctionEnd(LocalDate auctionEnd) {
 		this.auctionEnd = auctionEnd;
 	}
 	

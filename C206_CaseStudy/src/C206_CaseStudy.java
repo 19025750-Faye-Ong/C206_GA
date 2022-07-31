@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -190,6 +191,26 @@ public class C206_CaseStudy {
 	//================================= Option 2 Add (CRUD - Create)=================================
 
 	//Add Item
+	public static Item inputItem() {
+		int tag = Helper.readInt("Enter item id > ");
+		String name = Helper.readString("Enter item name> ");
+		String description = Helper.readString("Enter item description > ");
+		double minBid = Helper.readDouble("Enter minimum bid > ");
+		LocalDate auctionStart = Helper.readDate("Enter auction start date > ");
+		LocalDate auctionEnd = Helper.readDate("Enter auction end date > ");
+		double bidIncrement = Helper.readDouble("Enter bid increment > ");
+
+		Item it = new Item(tag, name, description, minBid, auctionStart, auctionEnd, bidIncrement);
+		return it;
+		
+	}
+	public static void addItem(ArrayList<Item> itemList, Item it) {
+		
+		itemList.add(it);
+		
+	}
+
+	
 
 	//Add User (Register User)
 	public static User inputUser() {
