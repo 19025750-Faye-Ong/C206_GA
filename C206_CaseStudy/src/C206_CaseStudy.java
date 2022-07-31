@@ -320,6 +320,44 @@ public class C206_CaseStudy {
 	//================================= Option 4 Remove (CURD- Delete)=================================
 
 	//Remove Item
+	public static boolean doRemoveItem(ArrayList<Item> itemList, int itId, String validation) {
+
+		boolean isRemove = false;
+
+		for (int i = 0; i < itemList.size(); i++) {
+
+			int id = itemList.get(i).getId();
+
+			if (itId == id				
+					&& itemList.get(i).getIsAvailable() == true) {
+
+				itemList.get(i).setIsAvailable(false);
+				if (validation == "Y" || validation == "y") {
+					itemList.removeAll(itemList);
+				} else {
+					System.out.println("Error in remove");
+				}
+				
+				
+				isRemove = true;
+
+			}
+		}
+		return isRemove;
+	}
+
+	public static void removeItem(ArrayList<Item> itemList) {
+		C206_CaseStudy.viewAllItem(itemList);
+		int itId = Helper.readInt("Enter Item ID to be removed > ");
+		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
+		Boolean isRemove =doRemoveItem(itemList, itId, validation);
+		if (isRemove == false) {
+			System.out.println("Invalid User ID!");
+		} else {
+			System.out.println("Item " + itId + " is removed. ");
+		}
+	}
+
 
 	//Remove User (FOR ADMIN ONLY)
 	public static boolean doRemoveUser(ArrayList<User> userList, String usId, String validation) {
