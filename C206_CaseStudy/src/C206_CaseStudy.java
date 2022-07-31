@@ -6,13 +6,81 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<User> userList = new ArrayList<User>();
+		ArrayList<Admin> adminList = new ArrayList<Admin>();
 
 		//itemList.add(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, 2.00);
 		//itemList.add(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, "01-02-2022", "11-02-2022", 5.00);
 		//itemList.add(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, "01-02-2022", "09-02-2022", 10.00);
 
-
+		userList.add(new User("tester", "Password123", "Team One",88121234,"tester@gmail.com"));
+		userList.add(new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com"));
+		
+		int option = 0;
+		C206_CaseStudy.menu();
+		option = Helper.readInt("Enter an option > ");
+		
+		if (option == 1) {
+			C206_CaseStudy.visitorMenu();
+			int visOption = Helper.readInt("Enter an option > ");
+			if (visOption == 1) {
+				C206_CaseStudy.viewAllItem(itemList);
+			} else if (visOption == 2) {
+				User us = inputUser();
+				C206_CaseStudy.addUser(userList, us);
+				System.out.println("User added");
+			} else {
+				System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+			}
+		} else {
+			C206_CaseStudy.loginMenu();
+			int lgOption = Helper.readInt("Enter an option > ");
+			if(lgOption == 1) {
+				String loginId = Helper.readString("User ID: ");
+				String loginPass = Helper.readString("Password: ");
+				for (int i = 0; i < adminList.size(); i++) {
+					String amID = adminList.get(i).getUserID();
+					String pass = adminList.get(i).getPassword();
+					
+					if (loginId.equals(amID) && loginPass.equals(pass) && adminList.get(i).getIsAvail() == true) {
+						C206_CaseStudy.adminMenu();
+						int amOption = Helper.readInt("Enter a option > ");
+						if (amOption == 1) {
+							C206_CaseStudy.removeUser(userList);
+						} else if (amOption == 2) {
+							C206_CaseStudy.removeItem(itemList);
+						} else  if (amOption == 3){
+							
+						} else {
+							System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+						}
+					}
+				}
+			} else {
+				String loginId = Helper.readString("User ID: ");
+				String loginPass = Helper.readString("Password: ");
+				for (int i = 0; i < userList.size(); i++) {
+					String userID = userList.get(i).getUserID();
+					String pass = userList.get(i).getPassword();
+					
+					if (loginId.equals(userID) && loginPass.equals(pass) && userList.get(i).getIsAvail() == true) {
+						C206_CaseStudy.userMenu();
+						int usOption = Helper.readInt("Enter a option > ");
+						if (usOption == 1) {
+							C206_CaseStudy.viewAllItem(itemList);
+							int itemId = Helper.readInt("Enter Item ID > ");
+						} else if (option == 2) {
+							Item it = inputItem();
+							C206_CaseStudy.addItem(userList, it);
+						} else {
+							System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+						}
+					}
+				}
+			}	
+		}
 	}
+	
+	
 	
 	public static void menu() {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
