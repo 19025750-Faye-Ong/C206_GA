@@ -12,6 +12,45 @@ public class C206_CaseStudy {
 
 
 	}
+	
+	public static void menu() {
+		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
+		System.out.println("1. As a Visitor ");
+		System.out.println("2. Login ");
+		Helper.line(80, "-");
+
+	}
+	
+	public static void loginMenu() {
+		C206_CaseStudy.setHeader("Login");
+		System.out.println("1. Login as admin");
+		System.out.println("2. Login as user");
+		Helper.line(80, "-");
+	}
+	
+	public static void userMenu() {
+		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
+		System.out.println("1. View all items ");
+		System.out.println("2. Sell items ");
+		Helper.line(80, "-");
+	}
+
+	public static void visitorMenu() {
+		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
+		System.out.println("1. View all items ");
+		System.out.println("2. Register account  ");
+		Helper.line(80, "-");
+	}
+	
+	public static void adminMenu() {
+		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
+		System.out.println("1. Block users ");
+		System.out.println("2. Remove items ");
+		System.out.println("3. Categorise items ");
+		Helper.line(80, "-");
+	}
+	
+	
 
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
