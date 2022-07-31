@@ -1,13 +1,14 @@
 
 public class Admin extends Account{
-	private int loginAttempt;
+	private String department;
 	
-	public Admin(String userId, String password, String username, int loginAttempt) {
+	public Admin(String userId, String password, String username, String department) {
 		super(userId, password, username);
+		this.department = department;
 	}
 
-	public int getLoginAttempt() {
-		return loginAttempt;
+	public String getDepartment() {
+		return department;
 	}
- 
+
 }
