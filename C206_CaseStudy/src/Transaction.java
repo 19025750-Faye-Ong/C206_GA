@@ -8,7 +8,7 @@ public class Transaction extends Item{
 	
 	public Transaction(int id,  String name, String description, double minBid, String auctionStart, String auctionEnd,
 			double bidIncrement, String transactionid, Double finalPrice, Date transactionDate) {
-		super(id, name, description, minBid, auctionStart, auctionEnd, bidIncrement);
+		super(id, name, description, minBid, bidIncrement);
 		this.transactionid = transactionid;
 		this.finalPrice = finalPrice;
 		this.transactionDate = transactionDate;
