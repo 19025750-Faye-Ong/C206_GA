@@ -6,9 +6,9 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		ArrayList<Item> itemList = new ArrayList<Item>();
 
-		itemList.add(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, 2.00);
-		itemList.add(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, "01-02-2022", "11-02-2022", 5.00);
-		itemList.add(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, "01-02-2022", "09-02-2022", 10.00);
+		//itemList.add(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, 2.00);
+		//itemList.add(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, "01-02-2022", "11-02-2022", 5.00);
+		//itemList.add(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, "01-02-2022", "09-02-2022", 10.00);
 
 
 	}
@@ -72,7 +72,7 @@ public class C206_CaseStudy {
 	//================================= Option 1 View (CRUD - Read) =================================
 
 	//Item List View
-	public static String retrieveAllItem(ArrayList<Item>itemList ) {
+	/*public static String retrieveAllItem(ArrayList<Item>itemList ) {
 		String output = "";
 
 		for (int i = 0; i < itemList.size(); i++) {
@@ -91,7 +91,7 @@ public class C206_CaseStudy {
 				"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
 		output += retrieveAllItem(itemList);	
 		System.out.println(output);
-	}
+	}*/
 
 	//User List View (FOR ADMIN ONLY)
 	public static String retrieveAllUser(ArrayList<User> userList) {
@@ -101,7 +101,7 @@ public class C206_CaseStudy {
 
 			output += String.format("%-10s %-30s %-10s %-20s\n", userList.get(i).getUserID(),
 					userList.get(i).getUsername(), 
-					userList.get(i).getContactNum(),userList.get(i).getRating());
+					userList.get(i).getContactNum(),userList.get(i).getEmail());
 		}
 		return output;
 	}
@@ -110,7 +110,7 @@ public class C206_CaseStudy {
 
 		C206_CaseStudy.setHeader("USER LIST");
 		String output = String.format("%-10s %-30s %-10s %-20s\n", "USER ID", "USERNAME",
-				"CONTACT NUMBER", "RATING");
+				"CONTACT NUMBER", "EMAIL");
 		output += retrieveAllUser(userList);
 		System.out.println(output);
 	}
