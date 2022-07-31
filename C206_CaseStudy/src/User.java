@@ -26,5 +26,5 @@ public class User extends Account {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+ 
 }
