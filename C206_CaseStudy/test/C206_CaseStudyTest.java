@@ -64,6 +64,36 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n","tester2","Password123","Group One ",88989876,"tester2@gmail.com");
 		assertEquals("Test that ViewAllUserlist", testOutput, allUser);
 	}
+	
+	@Test
+	public void testDoUpdateUser() {
+
+		//boundary
+		assertNotNull("test if there is valid User arraylist to update from", userList);
+		
+		C206_CaseStudy.addUser(userList, us1);
+		
+		// normal
+		Boolean ok = C206_CaseStudy.doUpdateUser(userList, "tester", "Password123", 88121234 , "tester@gmail.com" );
+		assertTrue("Test if an available item is ok to update?", ok);
+		
+		//error condition
+		ok = C206_CaseStudy.doUpdateUser(userList, "tester", "Password123",88121234 , "tester@gmail.com"  );
+		assertFalse("Test if an same item is NOT ok to update again?", ok);	
+		
+		//error condition
+		C206_CaseStudy.addUser(userList, us2);	
+		us2.setIsAvail(false);
+		ok = C206_CaseStudy.doUpdateUser(userList, "tester2", "Password123" ,88989876 ," tester2@gmail.com");
+		assertFalse("Test that un-available item is NOT ok to update?", ok);
+		
+		//error condition
+		ok = C206_CaseStudy.doUpdateUser(userList, "tester3", "Password123" , 87971256 , "tester3@gmail.com");
+		assertFalse("Test that non-exiting item is NOT ok to update?", ok);
+
+
+	}
+	
 
 	@After
 	public void tearDown() throws Exception {
