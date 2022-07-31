@@ -5,6 +5,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Item> itemList = new ArrayList<Item>();
+		ArrayList<User> userList = new ArrayList<User>();
 
 		//itemList.add(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, 2.00);
 		//itemList.add(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, "01-02-2022", "11-02-2022", 5.00);

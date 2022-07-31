@@ -1,13 +1,24 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-
+	private User cc1;
+	private User cc2;
+	
+	ArrayList<User> userList = new ArrayList<User>();
+	
+	public C206_CaseStudyTest() {
+		super();
+	}
+	
 	@Before
 	public void setUp() throws Exception {
+		
 	}
 
 	@After
