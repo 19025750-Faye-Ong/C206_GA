@@ -46,7 +46,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. Block users ");
 		System.out.println("2. Remove items ");
-		System.out.println("3. Categorise items ");
+		System.out.println("3. Categorise items");
 		Helper.line(80, "-");
 	}
 	
