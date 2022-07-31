@@ -33,6 +33,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. View all items ");
 		System.out.println("2. Sell items ");
+		System.out.println("3. Log out ");
 		Helper.line(80, "-");
 	}
 
@@ -40,6 +41,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. View all items ");
 		System.out.println("2. Register account  ");
+		System.out.println("3. Quit ");
 		Helper.line(80, "-");
 	}
 	
@@ -48,6 +50,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Block users ");
 		System.out.println("2. Remove items ");
 		System.out.println("3. Categorise items");
+		System.out.println("4. Log out ");
 		Helper.line(80, "-");
 	}
 	
