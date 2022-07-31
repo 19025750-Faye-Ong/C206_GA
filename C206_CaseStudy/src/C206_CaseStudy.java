@@ -54,7 +54,7 @@ public class C206_CaseStudy {
 							System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 						}
 					}
-				}
+				} 
 			} else {
 				String loginId = Helper.readString("User ID: ");
 				String loginPass = Helper.readString("Password: ");
