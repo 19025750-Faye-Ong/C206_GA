@@ -276,7 +276,7 @@ public class C206_CaseStudy {
 			System.out.println("Invalid Item ID!");
 		} else {
 			System.out.println("Item " + itId + " is updated");
-		}
+		} 
 	}
 
 	//Edit User Info
