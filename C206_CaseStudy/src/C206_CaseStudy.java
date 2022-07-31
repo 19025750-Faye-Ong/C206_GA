@@ -134,7 +134,7 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void addCamcorder(ArrayList<User> userList, User us) {
+	public static void addUser(ArrayList<User> userList, User us) {
 
 		userList.add(us);
 
