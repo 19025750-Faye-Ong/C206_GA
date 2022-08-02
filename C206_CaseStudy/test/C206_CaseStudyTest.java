@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -9,8 +11,11 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 	private User us1;
 	private User us2;
+	private Category it1;
+	private Category it2;
 	
 	ArrayList<User> userList = new ArrayList<User>();
+	ArrayList<Category> itemList = new ArrayList<Category>();
 	
 	public C206_CaseStudyTest() {
 		super();
@@ -22,7 +27,13 @@ public class C206_CaseStudyTest {
 		us1 = new User("tester", "Password123", "Team One",88121234,"tester@gmail.com");
 		us2 = new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com");
 		
-		userList= new ArrayList<User>();
+		DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		it1 = new Category(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00, "Drinkware");
+		it2 = new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+
+		userList = new ArrayList<User>();
+		itemList = new ArrayList<Category>();
 	}
 	
 	@Test
@@ -93,6 +104,7 @@ public class C206_CaseStudyTest {
 
 
 	}
+	
 	@Test
 	public void testDoRemoveUser() {
 		//boundary
@@ -124,7 +136,10 @@ public class C206_CaseStudyTest {
 	public void tearDown() throws Exception {
 		us1 = null;
 		us2 = null;
+		it1 = null;
+		it2 = null;
 		userList = null;
+		itemList = null;
 	}
 	
 }

@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+
 public class C206_CaseStudy {
 
 	public static void main(String[] args) {
@@ -18,8 +19,8 @@ public class C206_CaseStudy {
 
 		userList.add(new User("tester", "Password123", "Team One",88121234,"tester@gmail.com"));
 		userList.add(new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com"));
-		adminList.add(new Admin("Admin1", "password 456", "CoolWell","Front-desk")); 
-		adminList.add(new Admin("Admin2","password 789", "AdminRP","Engineering"));
+		adminList.add(new Admin("Admin1", "password456", "CoolWell","Front-desk")); 
+		adminList.add(new Admin("Admin2","password789", "AdminRP","Engineering"));
 		
 		int option = 0;
 		while(option != 3) {
@@ -70,8 +71,8 @@ public class C206_CaseStudy {
 									} else if (amOption == 2) {
 										C206_CaseStudy.removeItem(itemList);
 									} else  if (amOption == 3){
-										
-									} else {
+										C206_CaseStudy.categorise(itemList);
+									} else if (amOption == 4) {
 										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 									}
 								}
@@ -161,8 +162,6 @@ public class C206_CaseStudy {
 		System.out.println("4. Log out ");
 		Helper.line(80, "-");
 	}
-	
-	
 
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
@@ -356,7 +355,40 @@ public class C206_CaseStudy {
 			System.out.println("User " + usId + " is updated:)");
 		}
 	}
+	
+	//Categorise
+	public static boolean doCategorise(ArrayList<Category> itemList, int itID, String cat) {
 
+		boolean isUpdate = false;
+
+		for (int i = 0; i < itemList.size(); i++) {
+
+			int id = itemList.get(i).getId();
+
+			if (itID == id && itemList.get(i).getIsAvailable() == true) {
+
+				itemList.get(i).setIsAvailable(false);
+				
+				
+				isUpdate = true;
+
+			}
+		}
+		return isUpdate;
+	}
+
+	public static void categorise(ArrayList<Category> itemList) {
+		C206_CaseStudy.viewAllItem(itemList);
+		int itID = Helper.readInt("Enter Item ID > ");
+		String cat = Helper.readString("Enter Category > ");
+        
+		Boolean isCategory = doCategorise(itemList, itID, cat);
+		if (isCategory == false) {
+			System.out.println("Invalid Item ID!");
+		} else {
+			System.out.println("Item " + itID + " is updated");
+		} 
+	}
 	//================================= Option 4 Remove (CURD- Delete)=================================
 
 	//Remove Item
