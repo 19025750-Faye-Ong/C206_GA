@@ -130,7 +130,22 @@ public class C206_CaseStudyTest {
 
 
 	}
-	
+	@Test
+	public void testAddItem() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Item arraylist to add to", itemList);
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
+		C206_CaseStudy.addItem(itemList, it1);
+		assertEquals("Check that Item arraylist size is 1", 1, itemList.size());
+		assertSame("Check that Item is added", it1, itemList.get(0));
+
+		//Add another item. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addItem(itemList, it2);
+		assertEquals("Check that Item arraylist size is 2", 2, userList.size());
+		assertSame("Check that Item is added", it2, itemList.get(1));
+	}
 
 	@After
 	public void tearDown() throws Exception {
