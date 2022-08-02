@@ -1,20 +1,25 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList<Item> itemList = new ArrayList<Item>();
+		ArrayList<Category> itemList = new ArrayList<Category>();
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
+		
+		DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		//itemList.add(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, 2.00);
-		//itemList.add(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, "01-02-2022", "11-02-2022", 5.00);
-		//itemList.add(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, "01-02-2022", "09-02-2022", 10.00);
+		itemList.add(new Category(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00, "Drinkware"));
+		itemList.add(new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags"));
+		itemList.add(new Category(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion"));
 
 		userList.add(new User("tester", "Password123", "Team One",88121234,"tester@gmail.com"));
 		userList.add(new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com"));
+		adminList.add(new Admin("Admin1", "password 456", "CoolWell","Front-desk")); 
+		adminList.add(new Admin("Admin2","password 789", "AdminRP","Engineering"));
 		
 		int option = 0;
 		while(option != 3) {
@@ -90,7 +95,7 @@ public class C206_CaseStudy {
 										C206_CaseStudy.viewAllItem(itemList);
 										int itemId = Helper.readInt("Enter Item ID > ");
 									} else if (usOption == 2) {
-										Item it = inputItem();
+										Category it = inputItem();
 										C206_CaseStudy.addItem(itemList, it);
 									} else if (usOption == 3) {
 										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
@@ -179,7 +184,7 @@ public class C206_CaseStudy {
 	//================================= Option 1 View (CRUD - Read) =================================
 
 	//Item List View
-	public static String retrieveAllItem(ArrayList<Item>itemList ) {
+	public static String retrieveAllItem(ArrayList<Category>itemList ) {
 		String output = "";
 
 		for (int i = 0; i < itemList.size(); i++) {
@@ -193,7 +198,7 @@ public class C206_CaseStudy {
 		return output; 	
 	}
 
-	public static void viewAllItem(ArrayList<Item> itemList) {
+	public static void viewAllItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
 		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "NAME", "DESCRIPTION","AVAILIBILITY", "MinBid","AuctionStart", "AuctionEnd", "BidIncrement" );
 		output += retrieveAllItem(itemList);	
@@ -225,20 +230,21 @@ public class C206_CaseStudy {
 	//================================= Option 2 Add (CRUD - Create)=================================
 
 	//Add Item
-	public static Item inputItem() {
+	public static Category inputItem() {
 		int tag = Helper.readInt("Enter item id > ");
 		String name = Helper.readString("Enter item name> ");
 		String description = Helper.readString("Enter item description > ");
 		double minBid = Helper.readDouble("Enter minimum bid > ");
-		LocalDate auctionStart = Helper.readDate("Enter auction start date > ");
-		LocalDate auctionEnd = Helper.readDate("Enter auction end date > ");
+		LocalDate auctionStart = LocalDate.parse("Enter auction start date > ");
+		LocalDate auctionEnd = LocalDate.parse("Enter auction end date > ");
 		double bidIncrement = Helper.readDouble("Enter bid increment > ");
+		String cat = Helper.readString("Enter category > ");
 
-		Item it = new Item(tag, name, description, minBid, auctionStart, auctionEnd, bidIncrement);
+		Category it = new Category(tag, name, description, minBid, auctionStart, auctionEnd, bidIncrement, cat);
 		return it;
 		
 	}
-	public static void addItem(ArrayList<Item> itemList, Item it) {
+	public static void addItem(ArrayList<Category> itemList, Category it) {
 		
 		itemList.add(it);
 		
@@ -269,7 +275,7 @@ public class C206_CaseStudy {
 	//================================= Option 3 Edit (CURD- Update) =================================
 
 	//Edit Item
-	public static boolean doUpdateItem(ArrayList<Item>itemList, int itId, String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd, double bidIncrement) {
+	public static boolean doUpdateItem(ArrayList<Category>itemList, int itId, String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd, double bidIncrement) {
 
 		boolean isUpdate = false;
 
@@ -295,14 +301,14 @@ public class C206_CaseStudy {
 		return isUpdate;
 	}
 
-	public static void updateItem(ArrayList<Item> itemList) {
+	public static void updateItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.viewAllItem(itemList);
 		int itId = Helper.readInt("Enter Item ID > ");
 		String name  = Helper.readString("Enter your new  name > ");
 		String description = Helper.readString("Enter new description > ");
 		double minBid = Helper.readDouble("Enter new minimum bid > ");
-		LocalDate auctionStart = Helper.readDate("Enter new aution start date > ");
-		LocalDate auctionEnd = Helper.readDate("Enter new aution end date > ");
+		LocalDate auctionStart = Helper.readDate("Enter new auction start date > ");
+		LocalDate auctionEnd = Helper.readDate("Enter new auction end date > ");
         double bidIncrement= Helper.readDouble("Enter new bid increment > ");      
         
 		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, auctionStart, auctionEnd, bidIncrement);
@@ -354,7 +360,7 @@ public class C206_CaseStudy {
 	//================================= Option 4 Remove (CURD- Delete)=================================
 
 	//Remove Item
-	public static boolean doRemoveItem(ArrayList<Item> itemList, int itId, String validation) {
+	public static boolean doRemoveItem(ArrayList<Category> itemList, int itId, String validation) {
 
 		boolean isRemove = false;
 
@@ -380,11 +386,11 @@ public class C206_CaseStudy {
 		return isRemove;
 	}
 
-	public static void removeItem(ArrayList<Item> itemList) {
+	public static void removeItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.viewAllItem(itemList);
 		int itId = Helper.readInt("Enter Item ID to be removed > ");
 		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
-		Boolean isRemove =doRemoveItem(itemList, itId, validation);
+		Boolean isRemove = doRemoveItem(itemList, itId, validation);
 		if (isRemove == false) {
 			System.out.println("Invalid User ID!");
 		} else {
