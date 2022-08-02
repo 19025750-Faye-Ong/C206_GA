@@ -17,67 +17,99 @@ public class C206_CaseStudy {
 		userList.add(new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com"));
 		
 		int option = 0;
+		while(option != 3) {
 		C206_CaseStudy.menu();
 		option = Helper.readInt("Enter an option > ");
 		
-		if (option == 1) {
-			C206_CaseStudy.visitorMenu();
-			int visOption = Helper.readInt("Enter an option > ");
-			if (visOption == 1) {
-				C206_CaseStudy.viewAllItem(itemList);
-			} else if (visOption == 2) {
-				User us = inputUser();
-				C206_CaseStudy.addUser(userList, us);
-				System.out.println("User added");
+		
+			if (option == 1) {
+				C206_CaseStudy.visitorMenu();
+				int visOption = Helper.readInt("Enter an option > ");
+				
+				while (visOption != 3) {
+					if (visOption == 1) {
+						C206_CaseStudy.viewAllItem(itemList);
+					
+					} else if (visOption == 2) {
+						User us = inputUser();
+						C206_CaseStudy.addUser(userList, us);
+						System.out.println("User added");
+					
+					} else if (visOption == 3){
+						System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+					} else {
+						System.out.println("Invalid input");
+					}
+				} 
+				
+			} else if (option == 2) {
+				C206_CaseStudy.loginMenu();
+				int lgOption = Helper.readInt("Enter an option > ");
+				
+				while (lgOption != 3) {
+					if(lgOption == 1) {
+						String loginId = Helper.readString("User ID: ");
+						String loginPass = Helper.readString("Password: ");
+						
+						for (int i = 0; i < adminList.size(); i++) {
+							String amID = adminList.get(i).getUserID();
+							String pass = adminList.get(i).getPassword();
+					
+							if (loginId.equals(amID) && loginPass.equals(pass) && adminList.get(i).getIsAvail() == true) {
+								C206_CaseStudy.adminMenu();
+								int amOption = Helper.readInt("Enter a option > ");
+								
+								while (amOption != 4) {
+									if (amOption == 1) {
+										C206_CaseStudy.removeUser(userList);
+									} else if (amOption == 2) {
+										C206_CaseStudy.removeItem(itemList);
+									} else  if (amOption == 3){
+										
+									} else {
+										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+									}
+								}
+							} else {
+								System.out.println("This admin does not exist!");
+							}
+						} 
+					} else if (lgOption == 2) {
+						String loginId = Helper.readString("User ID: ");
+						String loginPass = Helper.readString("Password: ");
+						for (int i = 0; i < userList.size(); i++) {
+							String userID = userList.get(i).getUserID();
+							String pass = userList.get(i).getPassword();
+					
+							if (loginId.equals(userID) && loginPass.equals(pass) && userList.get(i).getIsAvail() == true) {
+								C206_CaseStudy.userMenu();
+								int usOption = Helper.readInt("Enter a option > ");
+								
+								while (usOption != 3) {
+									if (usOption == 1) {
+										C206_CaseStudy.viewAllItem(itemList);
+										int itemId = Helper.readInt("Enter Item ID > ");
+									} else if (usOption == 2) {
+										Item it = inputItem();
+										C206_CaseStudy.addItem(itemList, it);
+									} else if (usOption == 3) {
+										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+										
+									} else {
+										System.out.println("Invalid Option!");
+									}
+								}
+							}	
+						}
+					} else if (lgOption == 3) {
+						System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+					} else {
+						System.out.println("Invalid Input");
+					}
+				}	
 			} else {
 				System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 			}
-		} else {
-			C206_CaseStudy.loginMenu();
-			int lgOption = Helper.readInt("Enter an option > ");
-			if(lgOption == 1) {
-				String loginId = Helper.readString("User ID: ");
-				String loginPass = Helper.readString("Password: ");
-				for (int i = 0; i < adminList.size(); i++) {
-					String amID = adminList.get(i).getUserID();
-					String pass = adminList.get(i).getPassword();
-					
-					if (loginId.equals(amID) && loginPass.equals(pass) && adminList.get(i).getIsAvail() == true) {
-						C206_CaseStudy.adminMenu();
-						int amOption = Helper.readInt("Enter a option > ");
-						if (amOption == 1) {
-							C206_CaseStudy.removeUser(userList);
-						} else if (amOption == 2) {
-							C206_CaseStudy.removeItem(itemList);
-						} else  if (amOption == 3){
-							
-						} else {
-							System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
-						}
-					}
-				} 
-			} else {
-				String loginId = Helper.readString("User ID: ");
-				String loginPass = Helper.readString("Password: ");
-				for (int i = 0; i < userList.size(); i++) {
-					String userID = userList.get(i).getUserID();
-					String pass = userList.get(i).getPassword();
-					
-					if (loginId.equals(userID) && loginPass.equals(pass) && userList.get(i).getIsAvail() == true) {
-						C206_CaseStudy.userMenu();
-						int usOption = Helper.readInt("Enter a option > ");
-						if (usOption == 1) {
-							C206_CaseStudy.viewAllItem(itemList);
-							int itemId = Helper.readInt("Enter Item ID > ");
-						} else if (option == 2) {
-							Item it = inputItem();
-							C206_CaseStudy.addItem(userList, it);
-						} else {
-							System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
-						}
-					}
-				}
-			}	
 		}
 	}
 	
@@ -87,6 +119,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. As a Visitor ");
 		System.out.println("2. Login ");
+		System.out.println("3. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -95,6 +128,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Login");
 		System.out.println("1. Login as admin");
 		System.out.println("2. Login as user");
+		System.out.println("3. Quit");
 		Helper.line(80, "-");
 	}
 	
