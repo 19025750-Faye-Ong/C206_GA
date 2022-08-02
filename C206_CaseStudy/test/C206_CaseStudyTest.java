@@ -115,8 +115,6 @@ public class C206_CaseStudyTest {
 		// normal
 		Boolean ok = C206_CaseStudy.doRemoveUser(userList, "tester", "y");
 		assertTrue("Test if user is ok to remove?", ok);
-		assertFalse(userList.get(0).getIsAvail());
-		assertEquals(userList.get(0).getUserID(),"tester");
 				
 						
 		//error condition
@@ -143,7 +141,7 @@ public class C206_CaseStudyTest {
 		//Add another item. test The size of the list is 2? -normal
 		//The item just added is as same as the second item of the list
 		C206_CaseStudy.addItem(itemList, it2);
-		assertEquals("Check that Item arraylist size is 2", 2, userList.size());
+		assertEquals("Check that Item arraylist size is 2", 2, itemList.size());
 		assertSame("Check that Item is added", it2, itemList.get(1));
 	}
 
