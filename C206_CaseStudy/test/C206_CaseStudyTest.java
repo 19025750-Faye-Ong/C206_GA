@@ -162,7 +162,31 @@ public class C206_CaseStudyTest {
 20.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("12/02/2022", form1), 7.00);
 		assertFalse("Test that non-exiting item is NOT ok to update?",ok);
 	}
-	
+	@Test 
+	public void testDoRemoveItem() {
+		//boundary
+				assertNotNull("test if there is a removal of item", itemList);
+						
+				C206_CaseStudy.addItem(itemList, it1);
+						
+				// normal
+				Boolean ok = C206_CaseStudy.doRemoveItem(itemList, 1, "Drinkware");
+				assertTrue("Test if item is to remove?", ok);
+				assertFalse(itemList.get(0).getIsAvailable());
+				assertEquals(itemList.get(0).getId(),"ID");
+						
+								
+				//error condition
+				ok = C206_CaseStudy.doRemoveItem(itemList, 2,"Bag");
+				assertFalse("Test if the item is NOT ok to remove again?", ok);	
+			
+						
+				//error condition
+				ok = C206_CaseStudy.doRemoveItem(itemList, 2, "Bag");
+				assertFalse("Test that non-existing item is NOT ok to remove?", ok);
+
+		
+	}
 	
 	@Test
 	public void testDoRemoveUser() {
