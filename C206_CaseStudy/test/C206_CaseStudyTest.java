@@ -11,8 +11,11 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 	private User us1;
 	private User us2;
+	
 	private Category it1;
 	private Category it2;
+	
+	DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	ArrayList<User> userList = new ArrayList<User>();
 	ArrayList<Category> itemList = new ArrayList<Category>();
@@ -27,14 +30,36 @@ public class C206_CaseStudyTest {
 		us1 = new User("tester", "Password123", "Team One",88121234,"tester@gmail.com");
 		us2 = new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com");
 		
-		DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
-		it1 = new Category(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00, "Drinkware");
-		it2 = new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+		userList= new ArrayList<User>();
+		itemList= new ArrayList<Category>();
 
-		userList = new ArrayList<User>();
-		itemList = new ArrayList<Category>();
 	}
+	
+	@Test
+	public void testRetrieveAllItem() {
+		
+		// Test if Item list is not null but empty, so that can add a new item
+		//fail("Not yet implemented");
+				// Test if Item list is not null but empty - boundary
+				assertNotNull("Test if there is valid item arraylist to retrieve item from", itemList);
+				
+				//test if the list of User retrieved from the SourceCentre is empty - boundary
+				String allItem= C206_CaseStudy.retrieveAllItem(itemList);
+				String testOutput = "";
+				assertEquals("Test that the retrieved itemList is empty?", testOutput, allItem);
+				
+				//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+				 C206_CaseStudy.addItem(itemList, it1);
+				 C206_CaseStudy.addItem(itemList, it2);
+				assertEquals("Test that User arraylist size is 2", 2, itemList.size());
+				
+				//test if the expected output string same as the list of users retrieved from the SourceCentre	
+				allItem= C206_CaseStudy.retrieveAllItem(itemList);
+				testOutput = String.format("%-10s %-30s %-10s %-10s %-20s\n",2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+				testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n",3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+				assertEquals("Test that ViewAllitemList", testOutput, allItem);
+			}
+	
 	
 	@Test
 	public void testAddUser() {
@@ -104,7 +129,6 @@ public class C206_CaseStudyTest {
 
 
 	}
-	
 	@Test
 	public void testDoRemoveUser() {
 		//boundary
@@ -136,10 +160,7 @@ public class C206_CaseStudyTest {
 	public void tearDown() throws Exception {
 		us1 = null;
 		us2 = null;
-		it1 = null;
-		it2 = null;
 		userList = null;
-		itemList = null;
 	}
 	
 }
