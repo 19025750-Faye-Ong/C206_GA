@@ -1,7 +1,7 @@
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class Transaction extends Item{
+public class Transaction {
 	private String transactionid;
 	private Double finalPrice;
 	private Date transactionDate;
@@ -9,7 +9,6 @@ public class Transaction extends Item{
 	
 	public Transaction(int id,  String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd,
 			double bidIncrement, String transactionid, Double finalPrice, Date transactionDate) {
-		super(id, name, description, minBid, auctionStart, auctionEnd, bidIncrement);
 		this.transactionid = transactionid;
 		this.finalPrice = finalPrice;
 		this.transactionDate = transactionDate;
