@@ -129,6 +129,41 @@ public class C206_CaseStudyTest {
 
 
 	}
+	
+	@Test
+	public void testDoUpdateItem() {
+
+		//boundary
+		assertNotNull("test if there is valid item arraylist to update from", itemList);
+		
+		C206_CaseStudy.addItem(itemList, it1);
+		
+		// normal
+		Boolean ok = C206_CaseStudy.doUpdateItem(itemList,1,"Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 
+9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00);
+		assertTrue("Test if an available item is ok to update?", ok);
+		
+		//error condition
+		ok = C206_CaseStudy.doUpdateItem(itemList,1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 
+9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00);
+		assertFalse("Test if an same item is NOT ok to update again?", ok);	
+		
+		//error condition
+		C206_CaseStudy.addItem(itemList, it2);	
+		it2.setIsAvailable(false);
+		ok = C206_CaseStudy.doUpdateItem(itemList,2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 
+15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00);
+		assertFalse("Test that un-available item is NOT ok to update?", ok);
+
+	
+		
+		//error condition
+		ok = C206_CaseStudy.doUpdateItem(itemList,3, "Limited Edition Bottle", "Condition: Like New, Bag is stranger than Stranger Things", 
+20.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("12/02/2022", form1), 7.00);
+		assertFalse("Test that non-exiting item is NOT ok to update?",ok);
+	}
+	
+	
 	@Test
 	public void testDoRemoveUser() {
 		//boundary
