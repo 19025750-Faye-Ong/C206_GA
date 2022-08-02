@@ -307,8 +307,8 @@ public class C206_CaseStudy {
 		String name  = Helper.readString("Enter your new  name > ");
 		String description = Helper.readString("Enter new description > ");
 		double minBid = Helper.readDouble("Enter new minimum bid > ");
-		LocalDate auctionStart = Helper.readDate("Enter new auction start date > ");
-		LocalDate auctionEnd = Helper.readDate("Enter new auction end date > ");
+		LocalDate auctionStart = LocalDate.parse("Enter new auction start date > ");
+		LocalDate auctionEnd = LocalDate.parse("Enter new auction end date > ");
         double bidIncrement= Helper.readDouble("Enter new bid increment > ");      
         
 		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, auctionStart, auctionEnd, bidIncrement);
