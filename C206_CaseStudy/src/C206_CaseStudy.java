@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 
 public class C206_CaseStudy {
-
+	
+	static DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Category> itemList = new ArrayList<Category>();
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		
-		DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
 
 		itemList.add(new Category(1, "Limited Edition RP Reusable Cup", "Condition: Brand New, Rose Gold Stainless Steel Cup with 500ml capacity.", 9.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1), 2.00, "Drinkware"));
 		itemList.add(new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags"));
@@ -52,7 +54,7 @@ public class C206_CaseStudy {
 				C206_CaseStudy.loginMenu();
 				int lgOption = Helper.readInt("Enter an option > ");
 				
-				while (lgOption != 3) {
+				//while (lgOption != 3) {
 					if(lgOption == 1) {
 						String loginId = Helper.readString("User ID: ");
 						String loginPass = Helper.readString("Password: ");
@@ -78,7 +80,7 @@ public class C206_CaseStudy {
 								}
 							} else {
 								System.out.println("This admin does not exist!");
-							}
+							} break;
 						} 
 					} else if (lgOption == 2) {
 						String loginId = Helper.readString("User ID: ");
@@ -91,20 +93,21 @@ public class C206_CaseStudy {
 								C206_CaseStudy.userMenu();
 								int usOption = Helper.readInt("Enter a option > ");
 								
-								while (usOption != 3) {
 									if (usOption == 1) {
 										C206_CaseStudy.viewAllItem(itemList);
 										int itemId = Helper.readInt("Enter Item ID > ");
+										
 									} else if (usOption == 2) {
 										Category it = inputItem();
 										C206_CaseStudy.addItem(itemList, it);
+										System.out.println("Item Added!");
+										
 									} else if (usOption == 3) {
 										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 										
 									} else {
 										System.out.println("Invalid Option!");
 									}
-								}
 							}	
 						}
 					} else if (lgOption == 3) {
@@ -112,7 +115,7 @@ public class C206_CaseStudy {
 					} else {
 						System.out.println("Invalid Input");
 					}
-				}	
+				//}	
 			} else {
 				System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 			}
@@ -190,7 +193,7 @@ public class C206_CaseStudy {
 			
 			output += String.format("%-10s %-30s %-10s %-10d.2f %-10s %-10s %-20d.2f\n", itemList.get(i).getName(),
 					itemList.get(i).getDescription(), C206_CaseStudy.showAvailability(itemList.get(i).getIsAvailable()), itemList.get(i).getMinBid(), 
-					itemList.get(i).getAuctionStart(),itemList.get(i).getAuctionEnd(), itemList.get(i).getBidIncrement());
+					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement());
 
 
 		}
@@ -234,12 +237,14 @@ public class C206_CaseStudy {
 		String name = Helper.readString("Enter item name> ");
 		String description = Helper.readString("Enter item description > ");
 		double minBid = Helper.readDouble("Enter minimum bid > ");
-		LocalDate auctionStart = LocalDate.parse("Enter auction start date > ");
-		LocalDate auctionEnd = LocalDate.parse("Enter auction end date > ");
+		String auctionStart = Helper.readString("Enter auction start date > ");
+		LocalDate aucStart = LocalDate.parse(auctionStart, form1);
+		String auctionEnd = Helper.readString("Enter auction end date > ");
+		LocalDate aucEnd = LocalDate.parse(auctionEnd, form1);
 		double bidIncrement = Helper.readDouble("Enter bid increment > ");
 		String cat = Helper.readString("Enter category > ");
 
-		Category it = new Category(tag, name, description, minBid, auctionStart, auctionEnd, bidIncrement, cat);
+		Category it = new Category(tag, name, description, minBid, aucStart, aucEnd, bidIncrement, cat);
 		return it;
 		
 	}
@@ -306,11 +311,13 @@ public class C206_CaseStudy {
 		String name  = Helper.readString("Enter your new  name > ");
 		String description = Helper.readString("Enter new description > ");
 		double minBid = Helper.readDouble("Enter new minimum bid > ");
-		LocalDate auctionStart = LocalDate.parse("Enter new auction start date > ");
-		LocalDate auctionEnd = LocalDate.parse("Enter new auction end date > ");
+		String auctionStart = Helper.readString("Enter new auction start date > ");
+		LocalDate aucStart = LocalDate.parse(auctionStart, form1);
+		String auctionEnd = Helper.readString("Enter new auction end date > ");
+		LocalDate aucEnd = LocalDate.parse(auctionEnd, form1);
         double bidIncrement= Helper.readDouble("Enter new bid increment > ");      
         
-		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, auctionStart, auctionEnd, bidIncrement);
+		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, aucStart, aucEnd, bidIncrement);
 		if (isUpdate == false) {
 			System.out.println("Invalid Item ID!");
 		} else {
@@ -445,7 +452,7 @@ public class C206_CaseStudy {
 
 				userList.get(i).setIsAvail(false);
 				if (validation == "Y" || validation == "y") {
-					userList.removeAll(userList);
+					userList.remove(userList);
 				} else {
 					System.out.println("Error in remove");
 				}
