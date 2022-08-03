@@ -189,7 +189,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < itemList.size(); i++) {
 			
-			output += String.format("%-45s %-80s %-10.2f %-20s %-20s %-20.2f\n", itemList.get(i).getName(),
+			output += String.format("%-45s %-80s %-10.2f %-20s %-20s %-20.2f %-10s\n", itemList.get(i).getName(),
 					itemList.get(i).getDescription(), itemList.get(i).getMinBid(), 
 					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement(), itemList.get(i).getCategory());
 
@@ -200,7 +200,7 @@ public class C206_CaseStudy {
 
 	public static void viewAllItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n", "NAME", "DESCRIPTION", "Min Bid", "Auction Start", "Auction End", "Bid Increment", "Category");
+		String output = String.format("%-45s %-80s %-10s %-20s %-20s %-20s %-10s\n", "NAME", "DESCRIPTION", "MIN BID", "AUCTION START", "AUCTION END", "BID INCREMENT", "CATEGORY");
 		output += retrieveAllItem(itemList);	
 		System.out.println(output);
 	}
