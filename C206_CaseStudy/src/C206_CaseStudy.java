@@ -418,9 +418,9 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < userList.size(); i++) {
 
-			String userID = userList.get(i).getUserID();
+			String email = userList.get(i).getEmail();
 
-			if (usId.equalsIgnoreCase(userID)				
+			if (usId.equalsIgnoreCase(email)				
 					&& userList.get(i).getIsAvail() == true) {
 
 				userList.get(i).setIsAvail(false);
