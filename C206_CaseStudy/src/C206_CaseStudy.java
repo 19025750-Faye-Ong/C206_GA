@@ -34,7 +34,6 @@ public class C206_CaseStudy {
 				C206_CaseStudy.visitorMenu();
 				int visOption = Helper.readInt("Enter an option > ");
 				
-				while (visOption != 3) {
 					if (visOption == 1) {
 						C206_CaseStudy.viewAllItem(itemList);
 					
@@ -44,45 +43,45 @@ public class C206_CaseStudy {
 						System.out.println("User added");
 					
 					} else if (visOption == 3){
+						
 						System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+						
 					} else {
 						System.out.println("Invalid input");
 					}
-				} 
 				
 			} else if (option == 2) {
 				C206_CaseStudy.loginMenu();
 				int lgOption = Helper.readInt("Enter an option > ");
 				
-				//while (lgOption != 3) {
-					if(lgOption == 1) {
-						String loginId = Helper.readString("User ID: ");
-						String loginPass = Helper.readString("Password: ");
+				if(lgOption == 1) {
+					String loginId = Helper.readString("User ID: ");
+					String loginPass = Helper.readString("Password: ");
 						
-						for (int i = 0; i < adminList.size(); i++) {
-							String amID = adminList.get(i).getUserID();
-							String pass = adminList.get(i).getPassword();
+					for (int i = 0; i < adminList.size(); i++) {
+						String amID = adminList.get(i).getUserID();
+						String pass = adminList.get(i).getPassword();
 					
-							if (loginId.equals(amID) && loginPass.equals(pass) && adminList.get(i).getIsAvail() == true) {
-								C206_CaseStudy.adminMenu();
-								int amOption = Helper.readInt("Enter a option > ");
+						if (loginId.equals(amID) && loginPass.equals(pass) && adminList.get(i).getIsAvail() == true) {
+							C206_CaseStudy.adminMenu();
+							int amOption = Helper.readInt("Enter a option > ");
 								
-								while (amOption != 4) {
-									if (amOption == 1) {
-										C206_CaseStudy.removeUser(userList);
-									} else if (amOption == 2) {
-										C206_CaseStudy.removeItem(itemList);
-									} else  if (amOption == 3){
-										C206_CaseStudy.categorise(itemList);
-									} else if (amOption == 4) {
-										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
-									}
+								if (amOption == 1) {
+									C206_CaseStudy.removeUser(userList);
+								} else if (amOption == 2) {
+									C206_CaseStudy.removeItem(itemList);
+								} else  if (amOption == 3){
+									C206_CaseStudy.categorise(itemList);
+								} else if (amOption == 4) {
+									System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 								}
-							} else {
-								System.out.println("This admin does not exist!");
-							} break;
-						} 
-					} else if (lgOption == 2) {
+	
+						} else {
+							System.out.println("This admin does not exist!");
+						}
+					} 
+					
+				} else if (lgOption == 2) {
 						String loginId = Helper.readString("User ID: ");
 						String loginPass = Helper.readString("Password: ");
 						for (int i = 0; i < userList.size(); i++) {
@@ -110,12 +109,11 @@ public class C206_CaseStudy {
 									}
 							}	
 						}
-					} else if (lgOption == 3) {
-						System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
-					} else {
+				} else if (lgOption == 3) {
+					System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
+				} else {
 						System.out.println("Invalid Input");
-					}
-				//}	
+				}
 			} else {
 				System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 			}
@@ -183,7 +181,7 @@ public class C206_CaseStudy {
 		return avail; 
 	}
 
-	//================================= Option 1 View (CRUD - Read) =================================
+	//================================= View (CRUD - Read) =================================
 
 	//Item List View
 	public static String retrieveAllItem(ArrayList<Category>itemList ) {
@@ -191,9 +189,9 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < itemList.size(); i++) {
 			
-			output += String.format("%-10s %-30s %-10s %-10.2f %-10s %-10s %-20.2f\n", itemList.get(i).getName(),
-					itemList.get(i).getDescription(), C206_CaseStudy.showAvailability(itemList.get(i).getIsAvailable()), itemList.get(i).getMinBid(), 
-					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement());
+			output += String.format("%-45s %-80s %-10.2f %-20s %-20s %-20.2f\n", itemList.get(i).getName(),
+					itemList.get(i).getDescription(), itemList.get(i).getMinBid(), 
+					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement(), itemList.get(i).getCategory());
 
 
 		}
@@ -202,10 +200,30 @@ public class C206_CaseStudy {
 
 	public static void viewAllItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "NAME", "DESCRIPTION","AVAILIBILITY", "MinBid","AuctionStart", "AuctionEnd", "BidIncrement" );
+		String output = String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n", "NAME", "DESCRIPTION", "Min Bid", "Auction Start", "Auction End", "Bid Increment", "Category");
 		output += retrieveAllItem(itemList);	
 		System.out.println(output);
 	}
+	
+	//View specific Item
+	/*public static void searchByCategory (ArrayList<Category> itemList) {
+		Helper.line(40,"-");
+		System.out.println("SEARCH FOR GAMERS BY NAME");
+		Helper.line(40,"=");
+		String searchName = Helper.readString("Enter name to search >");
+		String output = String.format("%-10s 8-5s 8-15s 8-5s \n",
+				for(int 1 = 0: 1 <gamers.size(); i+*) {
+					
+				}
+	"NAME", "AGE", "USERNAME", "POINTS");
+	if (gamers.get (i) .getName (). equalsIgnoreCase (searchName)) f
+	Gamer g - gamers.get (i);
+	output += String.format ("%-10s %-5d %-15s %-5d\n", 8-getName(), g.getAge(), g.getUsername(),
+	¿.getPoints());
+	break;
+	System.out.println(output);
+	}*/
+	
 
 	//User List View (FOR ADMIN ONLY)
 	public static String retrieveAllUser(ArrayList<User> userList) {
@@ -229,7 +247,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	} 
 
-	//================================= Option 2 Add (CRUD - Create)=================================
+	//================================= Add (CRUD - Create)=================================
 
 	//Add Item
 	public static Category inputItem() {
@@ -276,54 +294,41 @@ public class C206_CaseStudy {
 
 	}
 
-	//================================= Option 3 Edit (CURD- Update) =================================
+	//================================= Edit (CURD- Update) =================================
 
-	//Edit Item
-	public static boolean doUpdateItem(ArrayList<Category>itemList, int itId, String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd, double bidIncrement) {
+	//Categorise
+		public static boolean doCategorise(ArrayList<Category> itemList, int itID, String cat) {
 
-		boolean isUpdate = false;
+			boolean isUpdate = false;
 
-		for (int i = 0; i < itemList.size(); i++) {
+			for (int i = 0; i < itemList.size(); i++) {
 
-			 int id = itemList.get(i).getId();
-  
-			if (itId == id && itemList.get(i).getIsAvailable() == true) { 
+				int id = itemList.get(i).getId();
 
-				itemList.get(i).setIsAvailable(false);
-				itemList.get(i).setName(name);
-				itemList.get(i).setDescription(description);
-				itemList.get(i).setMinBid(minBid);
-				itemList.get(i).setBidIncrement( bidIncrement);
-				itemList.get(i).setAuctionStart(auctionStart);
-                                itemList.get(i).setAuctionEnd(auctionEnd);
+				if (itID == id && itemList.get(i).getIsAvailable() == true) {
 
+					itemList.get(i).setIsAvailable(false);
+					
+					
+					isUpdate = true;
 
-				isUpdate = true;
-
+				}
 			}
+			return isUpdate;
 		}
-		return isUpdate;
-	}
 
-	public static void updateItem(ArrayList<Category> itemList) {
-		C206_CaseStudy.viewAllItem(itemList);
-		int itId = Helper.readInt("Enter Item ID > ");
-		String name  = Helper.readString("Enter your new  name > ");
-		String description = Helper.readString("Enter new description > ");
-		double minBid = Helper.readDouble("Enter new minimum bid > ");
-		String auctionStart = Helper.readString("Enter new auction start date > ");
-		LocalDate aucStart = LocalDate.parse(auctionStart, form1);
-		String auctionEnd = Helper.readString("Enter new auction end date > ");
-		LocalDate aucEnd = LocalDate.parse(auctionEnd, form1);
-        double bidIncrement= Helper.readDouble("Enter new bid increment > ");      
-        
-		Boolean isUpdate = doUpdateItem(itemList, itId, name, description,minBid, aucStart, aucEnd, bidIncrement);
-		if (isUpdate == false) {
-			System.out.println("Invalid Item ID!");
-		} else {
-			System.out.println("Item " + itId + " is updated");
-		} 
-	}
+		public static void categorise(ArrayList<Category> itemList) {
+			C206_CaseStudy.viewAllItem(itemList);
+			int itID = Helper.readInt("Enter Item ID > ");
+			String cat = Helper.readString("Enter Category > ");
+	        
+			Boolean isCategory = doCategorise(itemList, itID, cat);
+			if (isCategory == false) {
+				System.out.println("Invalid Item ID!");
+			} else {
+				System.out.println("Item " + itID + " is updated");
+			} 
+		}
 
 	//Edit User Info
 	public static boolean doUpdateUser(ArrayList<User> userList, String usId, String pass, int usCN, String usEmail) {
@@ -363,40 +368,8 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	//Categorise
-	public static boolean doCategorise(ArrayList<Category> itemList, int itID, String cat) {
-
-		boolean isUpdate = false;
-
-		for (int i = 0; i < itemList.size(); i++) {
-
-			int id = itemList.get(i).getId();
-
-			if (itID == id && itemList.get(i).getIsAvailable() == true) {
-
-				itemList.get(i).setIsAvailable(false);
-				
-				
-				isUpdate = true;
-
-			}
-		}
-		return isUpdate;
-	}
-
-	public static void categorise(ArrayList<Category> itemList) {
-		C206_CaseStudy.viewAllItem(itemList);
-		int itID = Helper.readInt("Enter Item ID > ");
-		String cat = Helper.readString("Enter Category > ");
-        
-		Boolean isCategory = doCategorise(itemList, itID, cat);
-		if (isCategory == false) {
-			System.out.println("Invalid Item ID!");
-		} else {
-			System.out.println("Item " + itID + " is updated");
-		} 
-	}
-	//================================= Option 4 Remove (CURD- Delete)=================================
+	
+	//================================= Remove (CURD- Delete)=================================
 
 	//Remove Item
 	public static boolean doRemoveItem(ArrayList<Category> itemList, int itId, String validation) {
