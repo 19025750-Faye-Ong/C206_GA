@@ -435,15 +435,15 @@ public class C206_CaseStudy {
 
 
 	//Remove User (FOR ADMIN ONLY)
-	public static boolean doRemoveUser(ArrayList<User> userList, String usId, String validation) {
+	public static boolean doRemoveUser(ArrayList<User> userList, String email, String validation) {
 
 		boolean isRemove = false;
 
 		for (int i = 0; i < userList.size(); i++) {
 
-			String email = userList.get(i).getEmail();
+			String email1 = userList.get(i).getEmail();
 
-			if (usId.equalsIgnoreCase(email)				
+			if (email1.equalsIgnoreCase(email1)				
 					&& userList.get(i).getIsAvail() == true) {
 
 				userList.get(i).setIsAvail(false);
