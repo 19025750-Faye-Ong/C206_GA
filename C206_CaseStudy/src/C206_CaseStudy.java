@@ -465,13 +465,13 @@ public class C206_CaseStudy {
 
 	public static void removeUser(ArrayList<User> userList) {
 		C206_CaseStudy.viewAllUser(userList);
-		String usId = Helper.readString("Enter User ID to be removed > ");
+		String email = Helper.readString("Enter User ID to be removed > ");
 		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
-		Boolean isRemove =doRemoveUser(userList, usId, validation);
+		Boolean isRemove =doRemoveUser(userList, email, validation);
 		if (isRemove == false) {
 			System.out.println("Invalid User ID!");
 		} else {
-			System.out.println("User " + usId + " is removed. ");
+			System.out.println("User " + email + " is removed. ");
 		}
 	}
 }
