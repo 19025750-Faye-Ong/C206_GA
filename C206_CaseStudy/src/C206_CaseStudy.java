@@ -12,6 +12,7 @@ public class C206_CaseStudy {
 		ArrayList<Category> itemList = new ArrayList<Category>();
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
+		ArrayList<Bid> bidList = new ArrayList<Bid>();
 		
 		
 
@@ -21,8 +22,12 @@ public class C206_CaseStudy {
 
 		userList.add(new User("tester", "Password123", "Team One",88121234,"tester@gmail.com"));
 		userList.add(new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com"));
+		
 		adminList.add(new Admin("Admin1", "password456", "CoolWell","Front-desk")); 
 		adminList.add(new Admin("Admin2","password789", "AdminRP","Engineering"));
+		
+		bidList.add(new Bid(1, 9.00));
+		bidList.add(new Bid(2, 11.00));
 		
 		int option = 0;
 		while(option != 3) {
@@ -95,6 +100,9 @@ public class C206_CaseStudy {
 									if (usOption == 1) {
 										C206_CaseStudy.viewAllItem(itemList);
 										int itemId = Helper.readInt("Enter Item ID > ");
+										Bid bid = inputBid();
+										C206_CaseStudy.addBid(bidList, bid);
+										System.out.println("Bid Added!");
 										
 									} else if (usOption == 2) {
 										Category it = inputItem();
@@ -102,6 +110,8 @@ public class C206_CaseStudy {
 										System.out.println("Item Added!");
 										
 									} else if (usOption == 3) {
+										C206_CaseStudy.viewAllBid(bidList);
+									} else if (usOption == 4) {
 										System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 										
 									} else {
@@ -143,7 +153,8 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. View all items ");
 		System.out.println("2. Sell items ");
-		System.out.println("3. Log out ");
+		System.out.println("3. View Bids");
+		System.out.println("4. Log out ");
 		Helper.line(80, "-");
 	}
 
@@ -189,7 +200,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < itemList.size(); i++) {
 			
-			output += String.format("%-45s %-80s %-10.2f %-20s %-20s %-20.2f\n", itemList.get(i).getName(),
+			output += String.format("%-45s %-80s %-10.2f %-20s %-20s %-20.2f %-10s\n", itemList.get(i).getName(),
 					itemList.get(i).getDescription(), itemList.get(i).getMinBid(), 
 					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement(), itemList.get(i).getCategory());
 
@@ -200,31 +211,32 @@ public class C206_CaseStudy {
 
 	public static void viewAllItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n", "NAME", "DESCRIPTION", "Min Bid", "Auction Start", "Auction End", "Bid Increment", "Category");
+		String output = String.format("%-45s %-80s %-10s %-20s %-20s %-20s %-10s\n", "NAME", "DESCRIPTION", "MIN BID", "AUCTION START", "AUCTION END", "BID INCREMENT", "CATEGORY");
 		output += retrieveAllItem(itemList);	
 		System.out.println(output);
 	}
 	
-	//View specific Item
-	/*public static void searchByCategory (ArrayList<Category> itemList) {
-		Helper.line(40,"-");
-		System.out.println("SEARCH FOR GAMERS BY NAME");
-		Helper.line(40,"=");
-		String searchName = Helper.readString("Enter name to search >");
-		String output = String.format("%-10s 8-5s 8-15s 8-5s \n",
-				for(int 1 = 0: 1 <gamers.size(); i+*) {
-					
-				}
-	"NAME", "AGE", "USERNAME", "POINTS");
-	if (gamers.get (i) .getName (). equalsIgnoreCase (searchName)) f
-	Gamer g - gamers.get (i);
-	output += String.format ("%-10s %-5d %-15s %-5d\n", 8-getName(), g.getAge(), g.getUsername(),
-	¿.getPoints());
-	break;
-	System.out.println(output);
-	}*/
-	
+	//View Bid
+	public static String retrieveAllBid(ArrayList<Bid>bidList ) {
+		String output = "";
 
+		for (int i = 0; i < bidList.size(); i++) {
+			
+			output += String.format("%-15s %-10.2f\n", bidList.get(i).getBidID(),
+					bidList.get(i).getBidPrice());
+
+		}
+		return output; 	
+	}
+
+	public static void viewAllBid(ArrayList<Bid> bidList) {
+		C206_CaseStudy.setHeader("BID LIST");
+		String output = String.format("%-15s %-10s\n", "BID ID", "BID PRICE");
+		output += retrieveAllBid(bidList);	
+		System.out.println(output);
+	
+	}
+	
 	//User List View (FOR ADMIN ONLY)
 	public static String retrieveAllUser(ArrayList<User> userList) {
 		String output = "";
@@ -272,7 +284,20 @@ public class C206_CaseStudy {
 		
 	}
 
-	
+	//Add Bid
+	public static Bid inputBid() {
+		int bidId = Helper.readInt("Enter bid id > ");
+		Double bidPrice = Helper.readDouble("Enter bid price> ");
+
+		Bid bid = new Bid(bidId, bidPrice);
+		return bid;
+		
+	}
+	public static void addBid(ArrayList<Bid> bidList, Bid bid) {
+		
+		bidList.add(bid);
+		
+	}
 
 	//Add User (Register User)
 	public static User inputUser() {
