@@ -397,24 +397,22 @@ public class C206_CaseStudy {
 	//================================= Remove (CURD- Delete)=================================
 
 	//Remove Item
-	public static boolean doRemoveItem(ArrayList<Category> itemList, int itId, String validation) {
+	public static boolean doRemoveItem(ArrayList<Category> itemList,  String itName, String validation) {
 
 		boolean isRemove = false;
 
 		for (int i = 0; i < itemList.size(); i++) {
 
-			int id = itemList.get(i).getId();
+			String name = itemList.get(i).getName();
 
-			if (itId == id				
-					&& itemList.get(i).getIsAvailable() == true) {
+			if (name.equals(itemList.get(i).getName()) && itemList.get(i).getIsAvailable() == true) {
 
 				itemList.get(i).setIsAvailable(false);
-				if (validation == "Y" || validation == "y") {
-					itemList.removeAll(itemList);
-				} else {
-					System.out.println("Error in remove");
-				}
-				
+				//if (validation == "Y" || validation == "y") {
+					itemList.remove(i).getName();
+				//} else {
+					//System.out.println("Error in remove");
+				//}
 				
 				isRemove = true;
 
@@ -425,13 +423,13 @@ public class C206_CaseStudy {
 
 	public static void removeItem(ArrayList<Category> itemList) {
 		C206_CaseStudy.viewAllItem(itemList);
-		int itId = Helper.readInt("Enter Item ID to be removed > ");
+		String itName = Helper.readString("Enter Item Name to be removed > ");
 		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
-		Boolean isRemove = doRemoveItem(itemList, itId, validation);
+		Boolean isRemove = doRemoveItem(itemList, itName, validation);
 		if (isRemove == false) {
-			System.out.println("Invalid User ID!");
+			System.out.println("Invalid Item Name!");
 		} else {
-			System.out.println("Item " + itId + " is removed. ");
+			System.out.println("Item " + itName + " is removed. ");
 		}
 	}
 
