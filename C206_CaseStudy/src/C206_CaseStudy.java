@@ -191,7 +191,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < itemList.size(); i++) {
 			
-			output += String.format("%-10s %-30s %-10s %-10d.2f %-10s %-10s %-20d.2f\n", itemList.get(i).getName(),
+			output += String.format("%-10s %-30s %-10s %-10.2f %-10s %-10s %-20.2f\n", itemList.get(i).getName(),
 					itemList.get(i).getDescription(), C206_CaseStudy.showAvailability(itemList.get(i).getIsAvailable()), itemList.get(i).getMinBid(), 
 					itemList.get(i).getAuctionStart().format(form1),itemList.get(i).getAuctionEnd().format(form1), itemList.get(i).getBidIncrement());
 
