@@ -286,8 +286,8 @@ public class C206_CaseStudy {
 		for (int i = 0; i < itemList.size(); i++) {
 
 			 int id = itemList.get(i).getId();
-
-			if (itId == id && itemList.get(i).getIsAvailable() == true) {
+  
+			if (itId == id && itemList.get(i).getIsAvailable() == true) { 
 
 				itemList.get(i).setIsAvailable(false);
 				itemList.get(i).setName(name);
