@@ -30,6 +30,9 @@ public class C206_CaseStudyTest {
 		us1 = new User("tester", "Password123", "Team One",88121234,"tester@gmail.com");
 		us2 = new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com");
 		
+		it1 = new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+		it2 = new Category(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+		
 		userList= new ArrayList<User>();
 		itemList= new ArrayList<Category>();
 
@@ -55,8 +58,8 @@ public class C206_CaseStudyTest {
 				
 				//test if the expected output string same as the list of users retrieved from the SourceCentre	
 				allItem= C206_CaseStudy.retrieveAllItem(itemList);
-				testOutput = String.format("%-10s %-30s %-10s %-10s %-20s\n",2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
-				testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n",3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+				testOutput = String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n",2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+				testOutput += String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n",3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
 				assertEquals("Test that ViewAllitemList", testOutput, allItem);
 			}
 	
