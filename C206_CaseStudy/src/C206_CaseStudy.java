@@ -472,5 +472,38 @@ public class C206_CaseStudy {
 			System.out.println("User " + email + " is removed. ");
 		}
 	}
-}
+
+
+	public static boolean doRemoveBid(ArrayList<Bid> BidList, int ID, String validation) {
+		boolean isRemove = false; 
+		for (int i = 0; i < BidList.size(); i++) {
+			int bidId = BidList.get(i).getBidID();
+			
+			if (validation == "Y" || validation == "y") {
+				BidList.remove(BidList);
+			} else {
+				System.out.println("Error in remove");
+			
+				isRemove = true;
+				}
+		}
+		return isRemove;
+	}
+
+	
+	public static void removeBid(ArrayList<Bid> BidList) {
+		C206_CaseStudy.viewAllBid(BidList);
+		int bidId = Helper.readInt("Enter User ID to be removed > ");
+		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
+		Boolean isRemove =doRemoveBid(BidList, bidId, validation);
+		if (isRemove == false) {
+			System.out.println("Invalid User ID!");
+		} else {
+			System.out.println("User " + bidId + " is removed. ");
+		}
+	}
+	}
+
+	
+		
 
