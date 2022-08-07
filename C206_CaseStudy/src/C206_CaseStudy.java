@@ -13,6 +13,7 @@ public class C206_CaseStudy {
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		ArrayList<Bid> bidList = new ArrayList<Bid>();
+		ArrayList<Deal> DealList = new ArrayList<Deal>();
 		
 		
 
@@ -28,6 +29,9 @@ public class C206_CaseStudy {
 		
 		bidList.add(new Bid(1, 9.00));
 		bidList.add(new Bid(2, 11.00));
+		
+		DealList.add(new Deal(1, "Transaction Number One", "In this Transaction RP Reusable Cup was sold", 30.50, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1),2.00, 11, 50.00, LocalDate.parse("11/02/2022", form1)));
+		DealList.add(new Deal(2, "Transaction Number Two", "In this Transaction SP Reusable Cup was sold", 40.50, LocalDate.parse("04/02/2022", form1), LocalDate.parse("14/02/2022", form1),3.00, 12, 50.50, LocalDate.parse("03/03/2022", form1)));
 		
 		int option = 0;
 		while(option != 3) {
@@ -78,6 +82,8 @@ public class C206_CaseStudy {
 								} else  if (amOption == 3){
 									C206_CaseStudy.categorise(itemList);
 								} else if (amOption == 4) {
+									C206_CaseStudy.AddDeal(DealList);
+								} else if (amOption == 5) {
 									System.out.println("Thank you for visiting Campus Online Auction Shop (COAS)");
 								}
 	
@@ -171,7 +177,8 @@ public class C206_CaseStudy {
 		System.out.println("1. Block users ");
 		System.out.println("2. Remove items ");
 		System.out.println("3. Categorise items");
-		System.out.println("4. Log out ");
+		System.out.println("4. Add deal");
+		System.out.println("5. Log out ");
 		Helper.line(80, "-");
 	}
 
@@ -306,6 +313,8 @@ public class C206_CaseStudy {
 		String usName = Helper.readString("Enter Name > ");
 		int usCN = Helper.readInt("Enter Contact Number > ");
 		String usEmail = Helper.readString("Enter Email > ");
+		double bidIncrement = Helper.readDouble("Enter bid increment > ");
+
 
 
 		User us= new User(usId, pass, usName, usCN, usEmail);
@@ -318,7 +327,35 @@ public class C206_CaseStudy {
 		userList.add(us);
 
 	}
+	//Add Deal (Register Deal)
+	public static Deal AddDeal(ArrayList<Deal> dealList) {
+		int deId = Helper.readInt("Enter a unique Deal ID > ");
+		String name = Helper.readString("Name of Deal > ");
+		String desc = Helper.readString("Enter Description of the deal > ");
+		double minbid = Helper.readDouble("Enter the minimum bid of the deal");
+		String aucStart = Helper.readString("Enter auction start date > ");
+		LocalDate StartDate = LocalDate.parse(aucStart, form1);
+		String aucEnd = Helper.readString("Enter auction start date > ");
+		LocalDate EndDate = LocalDate.parse(aucEnd, form1);
+		double bidIncrement = Helper.readDouble("Enter bid increment > ");
+		int dealid = Helper.readInt("Enter an ID for the deal > ");
+		double finalprice = Helper.readDouble("Enter the final price of the bid > ");
+		String DealDate = Helper.readString("Enter the date the transaction was made > ");
+		LocalDate DDate = LocalDate.parse(DealDate, form1);
 
+
+		Deal de= new Deal(deId, name, desc, minbid, StartDate,EndDate, bidIncrement, dealid, finalprice, DDate);
+		return de;
+
+	}
+
+	public static void addDeal(ArrayList<Deal> DealList, Deal de) {
+
+		DealList.add(de);
+		}
+		
+		
+		
 	//================================= Edit (CURD- Update) =================================
 
 	//Categorise
@@ -471,39 +508,9 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("User " + email + " is removed. ");
 		}
-	}
-
-
-	public static boolean doRemoveBid(ArrayList<Bid> BidList, int ID, String validation) {
-		boolean isRemove = false; 
-		for (int i = 0; i < BidList.size(); i++) {
-			int bidId = BidList.get(i).getBidID();
-			
-			if (validation == "Y" || validation == "y") {
-				BidList.remove(BidList);
-			} else {
-				System.out.println("Error in remove");
-			
-				isRemove = true;
-				}
-		}
-		return isRemove;
-	}
-
-	
-	public static void removeBid(ArrayList<Bid> BidList) {
-		C206_CaseStudy.viewAllBid(BidList);
-		int bidId = Helper.readInt("Enter User ID to be removed > ");
-		String validation = Helper.readString(" Are you sure you want to remove? (Y/N) ");
-		Boolean isRemove =doRemoveBid(BidList, bidId, validation);
-		if (isRemove == false) {
-			System.out.println("Invalid User ID!");
-		} else {
-			System.out.println("User " + bidId + " is removed. ");
-		}
-	}
-	}
-
-	
 		
+		
+	}
+	
+}
 
