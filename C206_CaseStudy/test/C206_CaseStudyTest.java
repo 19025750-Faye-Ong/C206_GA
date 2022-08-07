@@ -18,12 +18,16 @@ public class C206_CaseStudyTest {
 	private Bid Bd1;
 	private Bid Bd2;
 	
+	private Deal de1;
+	private Deal de2;
+	
 	DateTimeFormatter form1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	ArrayList<User> userList = new ArrayList<User>();
 	ArrayList<Category> itemList = new ArrayList<Category>();
 	ArrayList<Bid> bidList = new ArrayList<Bid>();
-	
+	ArrayList<Deal> DealList = new ArrayList<Deal>();
+
 	public C206_CaseStudyTest() {
 		super();
 	}
@@ -34,6 +38,12 @@ public class C206_CaseStudyTest {
 		us1 = new User("tester", "Password123", "Team One",88121234,"tester@gmail.com");
 		us2 = new User("tester2","Password123", "Group One",88989876,"tester2@gmail.com");
 		
+		it1 = new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+		it2 = new Category(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+
+		de1 = new Deal(1, "Transaction Number One", "In this Transaction RP Reusable Cup was sold", 30.50, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1),2.00, 11, 50.00, LocalDate.parse("11/02/2022", form1));
+		de2 = new Deal(2, "Transaction Number Two", "In this Transaction SP Reusable Cup was sold", 40.50, LocalDate.parse("04/02/2022", form1), LocalDate.parse("14/02/2022", form1),3.00, 12, 50.50, LocalDate.parse("03/03/2022", form1));
+
 		userList= new ArrayList<User>();
 		itemList= new ArrayList<Category>();
 		bidList = new ArrayList<Bid>();
@@ -56,14 +66,15 @@ public class C206_CaseStudyTest {
 				//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 				 C206_CaseStudy.addItem(itemList, it1);
 				 C206_CaseStudy.addItem(itemList, it2);
-				 assertEquals("Test that User arraylist size is 2", 2, itemList.size());
-				
+				assertEquals("Test that User arraylist size is 2", 2, itemList.size());
+
 				//test if the expected output string same as the list of users retrieved from the SourceCentre	
 				allItem= C206_CaseStudy.retrieveAllItem(itemList);
-				testOutput = String.format("%-10s %-30s %-10s %-10s %-20s\n",2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
-				testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n",3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
-				assertEquals("Test that ViewAllitemList", testOutput, allItem);
+				testOutput = String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n",2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
+				testOutput += String.format("%-45s %-80s %-10s %-20s %-20s %-20s\n",3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+				assertEquals("Test that ViewAllitemList", allItem, testOutput);
 			}
+
 	@Test
 	public void testRetrieveAllUser() {
 		//fail("Not yet implemented");
@@ -268,6 +279,29 @@ public class C206_CaseStudyTest {
 		assertTrue("Test if user is ok to remove?", ok);
 	}
 	
+	@Test
+	public void testDoRemoveDeal() {
+		//boundary
+		assertNotNull("test if there is a removal of user", DealList);
+				
+		C206_CaseStudy.addDeal(DealList, de1);
+				
+		// normal
+		Boolean ok = C206_CaseStudy.doRemoveDeal(DealList, "tester", "y");
+		assertTrue("Test if Deal is ok to remove?", ok);
+				
+						
+		//error condition
+		ok = C206_CaseStudy.doRemoveDeal(DealList, "tester", "y");
+		assertFalse("Test if the same Deal is NOT ok to remove again?", ok);	
+	
+				
+		//error condition
+		ok = C206_CaseStudy.doRemoveDeal(DealList, "tester2", "y");
+		assertFalse("Test that non-existing user is NOT ok to remove?", ok);
+
+
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -275,5 +309,23 @@ public class C206_CaseStudyTest {
 		us2 = null;
 		userList = null;
 	}
+	@Test
+	public void testAddDeal() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid User arraylist to add to", DealList);
+		
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
+		C206_CaseStudy.addDeal(DealList, de1);
+		assertEquals("Check that User arraylist size is 1", 1, DealList.size());
+		assertSame("Check that User is added", Bd1, DealList.get(0));
+		
+		//Add another item. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addDeal(DealList, de2);
+		assertEquals("Check that User arraylist size is 2", 2, DealList.size());
+		assertSame("Check that User is added", de2, DealList.get(1));
+		}
+	
 	 
 }
