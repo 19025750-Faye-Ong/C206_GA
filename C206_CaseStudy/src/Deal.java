@@ -2,20 +2,20 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class Deal {
-	private String dealid;
+	private int dealid;
 	private Double finalPrice;
-	private Date dealDate;
+	private LocalDate dealDate;
 	
 	
 	public Deal(int id,  String name, String description, double minBid, LocalDate auctionStart, LocalDate auctionEnd,
-			double bidIncrement, String dealid, Double finalPrice, Date dealDate) {
+			double bidIncrement, int dealid, Double finalPrice, LocalDate dealDate) {
 		this.dealid = dealid;
 		this.finalPrice = finalPrice;
 		this.dealDate = dealDate;
 	}
 
 
-	public String getdealid() {
+	public int getdealid() {
 		return dealid;
 	}
 
@@ -25,7 +25,7 @@ public class Deal {
 	}
 
 
-	public Date getdealDate() {
+	public LocalDate getdealDate() {
 		return dealDate;
 	}
 		
