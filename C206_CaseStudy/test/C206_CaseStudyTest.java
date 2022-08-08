@@ -40,6 +40,9 @@ public class C206_CaseStudyTest {
 		
 		it1 = new Category(2, "Limited Edition Stranger Things Tote Bag", "Condition: Like New, Bag is stranger than Stranger Things", 15.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("11/02/2022", form1), 5.00, "Bags");
 		it2 = new Category(3, "Rainbow Care Bear Hat", "Condition: Brand New, we care about your head:)", 30.00, LocalDate.parse("01/02/2022", form1), LocalDate.parse("09/02/2022", form1), 10.00, "Fashion");
+		
+		Bd1 = new Bid(1, 9.00);
+		Bd2 = new Bid(2, 11.00);
 
 		de1 = new Deal(1, "Transaction Number One", "In this Transaction RP Reusable Cup was sold", 30.50, LocalDate.parse("01/02/2022", form1), LocalDate.parse("10/02/2022", form1),2.00, 11, 50.00, LocalDate.parse("11/02/2022", form1));
 		de2 = new Deal(2, "Transaction Number Two", "In this Transaction SP Reusable Cup was sold", 40.50, LocalDate.parse("04/02/2022", form1), LocalDate.parse("14/02/2022", form1),3.00, 12, 50.50, LocalDate.parse("03/03/2022", form1));
@@ -96,6 +99,29 @@ public class C206_CaseStudyTest {
 		 testOutput = String.format("%-10s %-10s  %-10d %-10s\n","tester", "Team One",88121234,"tester@gmail.com");
 		 testOutput += String.format("%-10s %-10s %-10d %-10s\n","tester2","Group One ",88989876,"tester2@gmail.com");
 		 assertEquals("Test that ViewAllUserlist", testOutput, allUser);
+	}
+	
+	@Test
+	public void testRetrieveAllBid() {
+		//fail("Not yet implemented");
+		// Test if bid list is not null but empty - boundary
+		assertNotNull("Test if there is valid Bid arraylist to retrieve item from", bidList);
+		
+		//test if the list of bid retrieved from the SourceCentre is empty - boundary
+		String allBid= C206_CaseStudy.retrieveAllBid(bidList);
+		String testOutput = "";
+		assertEquals("Test that the retrieved bidList is empty?", testOutput, allBid);
+		
+		//Given an empty list, after adding 2 bids, test if the size of the list is 2 - normal
+		 C206_CaseStudy.addBid(bidList, Bd1);
+		 C206_CaseStudy.addBid(bidList, Bd2);
+		 assertEquals("Test that Bid arraylist size is 2", 2, bidList.size());
+		
+		//test if the expected output string same as the list of bids retrieved from the SourceCentre	
+		 allBid = C206_CaseStudy.retrieveAllBid(bidList);
+		 testOutput = String.format("%-15s %-10s\n", "1", 9.00);
+		 testOutput += String.format("%-15s %-10s\n", "2", 11.00);
+		 assertEquals("Test that ViewAllBidlist", testOutput, allBid);
 	}
 	//===========================================================================================
 	@Test
