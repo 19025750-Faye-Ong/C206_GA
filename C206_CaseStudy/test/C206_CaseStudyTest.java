@@ -344,7 +344,7 @@ public class C206_CaseStudyTest {
 		//The item just added is as same as the first item of the list
 		C206_CaseStudy.addDeal(DealList, de1);
 		assertEquals("Check that User arraylist size is 1", 1, DealList.size());
-		assertSame("Check that User is added", Bd1, DealList.get(0));
+		assertSame("Check that User is added", de1, DealList.get(0));
 		
 		//Add another item. test The size of the list is 2? -normal
 		//The item just added is as same as the second item of the list
